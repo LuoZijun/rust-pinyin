@@ -155,9 +155,9 @@ impl Rhyme {
     pub fn has_single_vowel(&self) -> bool {
         // 单元音 韵母
         match self.0 {
-             0 ...  5 => true,
-            16 ... 21 => true,
-            32 ... 37 => true,
+             0 ..=  5 => true,
+            16 ..= 21 => true,
+            32 ..= 37 => true,
             // NOTE: 鼻音需要加入判断中来吗？
             _ => false,
         }
@@ -167,9 +167,9 @@ impl Rhyme {
     pub fn has_multi_vowel(&self) -> bool {
         // 复元音 韵母
         match self.0 {
-             6 ...  9 => true,
-            22 ... 25 => true,
-            38 ... 41 => true,
+             6 ..=  9 => true,
+            22 ..= 25 => true,
+            38 ..= 41 => true,
             // NOTE: 鼻音需要加入判断中来吗？
             _ => false,
         }
@@ -179,9 +179,9 @@ impl Rhyme {
     pub fn has_nasal(&self) -> bool {
         // 携带鼻音的韵母
         match self.0 {
-            10 ... 15 => true,
-            26 ... 31 => true,
-            42 ... 47 => true,
+            10 ..= 15 => true,
+            26 ..= 31 => true,
+            42 ..= 47 => true,
             _ => false,
         }
     }
@@ -300,40 +300,42 @@ impl Rhyme {
     // 格式化输出韵母部分 (注: 这个输出不会应用 补写和改写 规则)
     #[inline]
     pub fn format(&self, fmt: ToneFormat) -> &'static str {
-        match fmt {
-            ToneFormat::Ignore => {
-                self.as_str()
-            },
-            ToneFormat::Symbol => {
-                unimplemented!()
-            },
-            ToneFormat::Digit => {
-                unimplemented!()
-            },
-            ToneFormat::Index => {
-                unimplemented!()
-            },
-        }
+        // match fmt {
+        //     ToneFormat::Ignore => {
+        //         self.as_str()
+        //     },
+        //     ToneFormat::Symbol => {
+        //         unimplemented!()
+        //     },
+        //     ToneFormat::Digit => {
+        //         unimplemented!()
+        //     },
+        //     ToneFormat::Index => {
+        //         unimplemented!()
+        //     },
+        // }
+        unimplemented!()
     }
 
     // 格式化输出韵母部分
     // 注: 这个输出会根据 声母部分来 应用 补写和改写 规则
     #[inline]
     pub fn format_with_initials(&self, _initials: Option<Initial>, fmt: ToneFormat) -> &'static str {
-        match fmt {
-            ToneFormat::Ignore => {
-                self.as_str()
-            },
-            ToneFormat::Symbol => {
-                unimplemented!()
-            },
-            ToneFormat::Digit => {
-                unimplemented!()
-            },
-            ToneFormat::Index => {
-                unimplemented!()
-            },
-        }
+        unimplemented!()
+        // match fmt {
+        //     ToneFormat::Ignore => {
+        //         self.as_str()
+        //     },
+        //     ToneFormat::Symbol => {
+        //         unimplemented!()
+        //     },
+        //     ToneFormat::Digit => {
+        //         unimplemented!()
+        //     },
+        //     ToneFormat::Index => {
+        //         unimplemented!()
+        //     },
+        // }
     }
 }
 

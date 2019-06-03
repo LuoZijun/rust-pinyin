@@ -14,6 +14,7 @@ pub static INITIAL_TABLE: [&'static str; 21] = [
      "b",  "p",  "m", "f", "d", "t", "n", "l",
      "g",  "k",  "h",      "j", "q", "x", 
     "zh", "ch", "sh", "r", "z", "c", "s",
+    // "ẑ", "ĉ", "ŝ",
 ];
 
 // 8 Bits

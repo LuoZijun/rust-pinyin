@@ -9,18 +9,30 @@ use std::fmt;
 
 // 声调: ˉ ˊ ˇ ˋ ˙
 
+// 
+// 调值: tone pitch  // 上标音高
+// 调符: tone mark   // 音调修饰符
+// 调值: tone value  // 数字音调
 
 /// 音调标记方式
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub enum ToneFormat {
     /// 不标示音调
-    Ignore,
+    Plain,
+    
     /// 带音调符号的拼音字母 ( fan, fān )
-    Symbol,
-    /// 数字法 ( fan, fɑn⁵⁵, fan³⁵ )
-    Digit,
-    /// 声序法 ( fan, fan1 )
-    Index,
+    Mark,
+
+    // NOTE: 不支持
+    // /// 调值标记法 ( fan, fɑn⁵⁵, fan³⁵ )
+    // Pitch,
+
+    // 数字标记法 ( fan, fa1n )
+    Number,
+
+    // NOTE: 暂不支持
+    // /// 声序法 ( fan, fan1 )
+    // Index,
 }
 
 
