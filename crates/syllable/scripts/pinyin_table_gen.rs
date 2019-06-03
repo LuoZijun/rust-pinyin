@@ -1,9 +1,9 @@
 
 
-pub(crate) const ________: &'static str = " ";
+pub(crate) const ________: &'static str = "";
 
 // ∅ b p m f d t n l g k h j q x zh ch sh r z c s
-pub static PINYIN_TABLE: [&'static str; 924] = [
+pub static PINYIN_TABLE: [&'static str; 990] = [
 //       ∅,        b,        p,        m,        f,        d,        t,        n,        l,        g,        k,        h,        j,        q,        x,       zh,       ch,       sh,        r,        z,        c,        s,
 // Group a Finals
   ________, ________, ________, ________, ________, ________, ________, ________, ________, ________, ________, ________, ________, ________, ________,    "zhi",    "chi",    "shi",     "ri",     "zi",     "ci",     "si",
@@ -19,7 +19,11 @@ pub static PINYIN_TABLE: [&'static str; 924] = [
       "en",    "ben",    "pen",    "men",    "fen",    "den", ________,    "nen", ________,    "gen",    "ken",    "hen", ________, ________, ________,   "zhen",   "chen",   "shen",    "ren",    "zen",    "cen",    "sen",
      "ang",   "bang",   "pang",   "mang",   "fang",   "dang",   "tang",   "nang",   "lang",   "gang",   "kang",   "hang", ________, ________, ________,  "zhang",  "chang",  "shang",   "rang",   "zang",   "cang",   "sang",
      "eng",   "beng",   "peng",   "meng",   "feng",   "deng",   "teng",   "neng",   "leng",   "geng",   "keng",   "heng", ________, ________, ________,  "zheng",  "cheng",  "sheng",   "reng",   "zeng",   "ceng",   "seng",
-     // 注: "ong" 不存在
+// 注: "ong" 不存在
+// 特殊音节组合
+       "n", ________, ________, ________, ________, ________, ________, ________, ________, ________, ________,     "hn", ________, ________, ________, ________, ________, ________, ________, ________, ________, ________,
+       "m", ________, ________, ________, ________, ________, ________, ________, ________, ________, ________,     "hm", ________, ________, ________, ________, ________, ________, ________, ________, ________, ________,
+      "ng", ________, ________, ________, ________, ________, ________, ________, ________, ________, ________,    "hng", ________, ________, ________, ________, ________, ________, ________, ________, ________, ________,
 
 // Group i Finals 
       "yi",     "bi",     "pi",     "mi", ________,     "di",     "ti",     "ni",     "li", ________, ________, ________,     "ji",     "qi",     "xi", ________, ________, ________, ________, ________, ________, ________,
@@ -79,43 +83,6 @@ pub static PINYIN_TABLE: [&'static str; 924] = [
 // "ê", "ê̄", "ế", "ê̌", "ề",
 // "ü", "ǖ", "ǘ", "ǚ", "ǜ",
 
-fn mark(s: &str, ch_start: usize, ch_end: usize, tone: usize) -> String {
-    // vowel
-    // let a = [ "a", "ā", "á", "ǎ", "à", ];
-    // let e = [ "e", "ē", "é", "ě", "è", ];
-    // let i = [ "i", "ī", "í", "ǐ", "ì", ];
-    // let m = [ "m", "m̄", "ḿ", "m̌", "m̀", ];
-    // let n = [ "n", "n̄", "ń", "ň", "ǹ", ];
-    // let o = [ "o", "ō", "ó", "ǒ", "ò", ];
-    // let u = [ "u", "ū", "ú", "ǔ", "ù", ];
-    // let e2 = [ "ê", "ê̄", "ế", "ê̌", "ề", ];
-    // let u2 = [ "ü", "ǖ", "ǘ", "ǚ", "ǜ", ];
-
-    let a = [ "a", "a1", "a2", "a3", "a4", ];
-    let e = [ "e", "e1", "e2", "e3", "e4", ];
-    let i = [ "i", "i1", "i2", "i3", "i4", ];
-    let m = [ "m", "m1", "m2", "m3", "m4", ];
-    let n = [ "n", "n1", "n2", "n3", "n4", ];
-    let o = [ "o", "o1", "o2", "o3", "o4", ];
-    let u = [ "u", "ū", "ú", "ǔ", "ù", ];
-    let e2 = [ "ê", "ê1", "ê2", "ê3", "ê4", ];
-    let u2 = [ "ü", "ü1", "ü2", "ü3", "ü4", ];
-
-    let ch = &s[ch_start..ch_end];
-    match ch {
-        "a" => s.replace(ch, a[tone]),
-        "e" => s.replace(ch, e[tone]),
-        "i" => s.replace(ch, i[tone]),
-        "m" => s.replace(ch, m[tone]),
-        "n" => s.replace(ch, n[tone]),
-        "o" => s.replace(ch, o[tone]),
-        "u" => s.replace(ch, u[tone]),
-        "ê" => s.replace(ch, e2[tone]),
-        "ü" => s.replace(ch, u2[tone]),
-        _ => unreachable!(),
-    }
-}
-
 
 fn codegen(tone_index: usize, style: [ [&'static str; 5]; 9]) {
     let mut pos = 0usize;
@@ -168,6 +135,10 @@ fn codegen(tone_index: usize, style: [ [&'static str; 5]; 9]) {
                     } else {
                         if let Some(index) = py.find("ê") {
                             (index, 2)
+                        } else if let Some(index) = py.find("n")  {
+                            (index, 1)
+                        } else if let Some(index) = py.find("m")  {
+                            (index, 1)
                         } else {
                             println!(" {:?} unreachable ...", py);
                             unreachable!()

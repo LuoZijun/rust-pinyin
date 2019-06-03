@@ -31,17 +31,6 @@ pub static SUPER_SCRIPT_TABLE: [&'static str; 10] = [
     "⁵", "⁶", "⁷", "⁸", "⁹",
 ];
 
-
-// "ê\u{304}", "ê\u{30c}", 
-// "ǹ", 
-// "ǹg", 
-// "ḿ", 
-// "ế", 
-// "ề"
-// 
-// n，m，ng，hm，ê
-// n、ng、m、hn、hng、hm、ê
-
 // 扬抑符 e-circumflex: ê Ê
 // 分音符 u-diaeresis:  ü Ü
 // 非自造组合字符: "m̀" "M̀" "ê̄" "ê̌" "Ê̄" "Ê̌"
