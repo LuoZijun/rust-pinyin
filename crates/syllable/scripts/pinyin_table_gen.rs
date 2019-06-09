@@ -133,15 +133,18 @@ fn codegen(tone_index: usize, style: [ [&'static str; 5]; 9]) {
 
                         (u2_index.unwrap(), 2)
                     } else {
-                        if let Some(index) = py.find("ê") {
-                            (index, 2)
-                        } else if let Some(index) = py.find("n")  {
-                            (index, 1)
-                        } else if let Some(index) = py.find("m")  {
-                            (index, 1)
-                        } else {
-                            println!(" {:?} unreachable ...", py);
-                            unreachable!()
+                        match *py {
+                            "ê"   => (0, 2),
+                            "n"   => (0, 1),
+                            "m"   => (0, 1),
+                            "ng"  => (0, 1),
+                            "hn"  => (1, 1),
+                            "hm"  => (1, 1),
+                            "hng" => (1, 1),
+                            _ => {
+                                println!(" {:?} unreachable ...", py);
+                                unreachable!()
+                            }
                         }
                     }
                 }
