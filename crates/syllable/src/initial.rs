@@ -7,7 +7,6 @@ use crate::tone::ToneFormat;
 // `y` 和 `w` 在现代学说里面被称为 `零声母` ，
 // 但是汉语拼音并不承认他的地位，所以它的出现与否应该按照 前缀补写规则 来。
 
-
 // 注: ng 在普通话当中只作韵尾(韵母尾部)，在一些地方方言当中可以用作声母 (如: ňg).
 //     我们这里并不支持。
 /// 声母表
@@ -63,6 +62,17 @@ impl Initial {
         self.0 & 0b0000_0001 == 1
     }
 
+    /// 转位简写形式 
+    #[inline]
+    pub fn simplified(&self) -> Self {
+        // 声母的简写形式
+        if self.is_simplified() {
+            *self
+        } else {
+            Self(self.0 | 0b0000_0001)
+        }
+    }
+
     #[inline]
     pub fn as_str(&self) -> &'static str {
         let offset = self.offset();
@@ -78,22 +88,6 @@ impl Initial {
             INITIAL_TABLE[offset as usize]
         }
     }
-
-    /// 转位简写形式 
-    #[inline]
-    pub fn simplified(&self) -> Self {
-        // 声母的简写形式
-        if self.is_simplified() {
-            *self
-        } else {
-            Self(self.0 | 0b0000_0001)
-        }
-    }
-
-    #[inline]
-    pub fn format(&self, _fmt: ToneFormat) -> &'static str {
-        self.as_str()
-    }
 }
 
 impl fmt::Debug for Initial {
@@ -106,4 +100,14 @@ impl fmt::Display for Initial {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.as_str())
     }
+}
+
+
+#[test]
+fn test_initial_const() {
+    assert_eq!(Initial::B.as_str(), "b");
+    assert_eq!(Initial::P.as_str(), "p");
+    assert_eq!(Initial::M.as_str(), "m");
+    assert_eq!(Initial::F.as_str(), "f");
+    assert_eq!(Initial::D.as_str(), "d");
 }

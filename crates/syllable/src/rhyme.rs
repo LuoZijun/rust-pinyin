@@ -162,37 +162,6 @@ const PLAIN_LEN: u16    = 40;
 const SIMPLIFIED_RHYME_LEN: u16 = 9;
 
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone)]
-pub enum RhymeGroup {
-    A,
-    I,
-    U,
-    // Ü
-    U2,
-}
-
-// 韵母类别
-#[derive(Debug, PartialEq, Eq, Copy, Clone)]
-pub enum RhymeCategory {
-    // 单元音韵母: SingleVowel
-    SingleVowelA,   // 单元音韵母, 开口呼
-    SingleVowelI,   // 单元音韵母, 齐齿呼
-    SingleVowelU,   // 单元音韵母, 合口呼
-    SingleVowelU2,  // 单元音韵母, 撮口呼
-
-    // compound finals
-    MultiVowelA,    // 复元音韵母, 开口呼
-    MultiVowelI,    // 复元音韵母, 齐齿呼
-    MultiVowelU,    // 复元音韵母, 合口呼
-    MultiVowelU2,   // 复元音韵母, 撮口呼
-
-    NasalA,         // 鼻音韵母, 开口呼
-    NasalI,         // 鼻音韵母, 齐齿呼
-    NasalU,         // 鼻音韵母, 合口呼
-    NasalU2,        // 鼻音韵母, 撮口呼
-}
-
-
 // 16 Bits
 // 低 第1位 被用作指示韵母是否为简写形式
 /// 韵母
@@ -291,7 +260,7 @@ impl Rhyme {
     }
 
     #[inline]
-    pub fn category(&self) -> RhymeCategory {
+    pub fn category(&self) -> () {
         unimplemented!()
     }
 
