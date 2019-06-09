@@ -1,7 +1,5 @@
 use core::fmt;
 
-use crate::tone::ToneFormat;
-
 
 // 对于 《汉语拼音方案》 当中的声母表的补充说明
 // `y` 和 `w` 在现代学说里面被称为 `零声母` ，
