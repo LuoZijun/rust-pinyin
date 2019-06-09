@@ -1,4 +1,4 @@
-use std::fmt;
+use core::fmt;
 
 
 // Unicode 修饰字符
@@ -30,9 +30,8 @@ pub enum ToneFormat {
     // 数字标记法 ( fan, fa1n )
     Number,
 
-    // NOTE: 暂不支持
-    // /// 声序法 ( fan, fan1 )
-    // Index,
+    /// 声序法 ( fan, fan1 )
+    Number2,
 }
 
 

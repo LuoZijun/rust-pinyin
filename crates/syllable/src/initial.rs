@@ -1,4 +1,5 @@
-use std::fmt;
+use core::fmt;
+
 use crate::tone::ToneFormat;
 
 
@@ -10,6 +11,7 @@ use crate::tone::ToneFormat;
 // 注: ng 在普通话当中只作韵尾(韵母尾部)，在一些地方方言当中可以用作声母 (如: ňg).
 //     我们这里并不支持。
 /// 声母表
+#[rustfmt::skip]
 pub static INITIAL_TABLE: [&'static str; 21] = [
      "b",  "p",  "m", "f", "d", "t", "n", "l",
      "g",  "k",  "h",      "j", "q", "x", 
@@ -25,6 +27,32 @@ pub struct Initial(pub(crate) u8);
 
 
 impl Initial {
+    pub const B: Self = Initial(0);
+    pub const P: Self = Initial(1 << 1);
+    pub const M: Self = Initial(2 << 1);
+    pub const F: Self = Initial(3 << 1);
+    pub const D: Self = Initial(4 << 1);
+
+    pub const T: Self = Initial(5 << 1);
+    pub const N: Self = Initial(6 << 1);
+    pub const L: Self = Initial(7 << 1);
+    pub const G: Self = Initial(8 << 1);
+    pub const K: Self = Initial(9 << 1);
+    pub const H: Self = Initial(10 << 1);
+
+    pub const J: Self = Initial(11 << 1);
+    pub const Q: Self = Initial(12 << 1);
+    pub const X: Self = Initial(13 << 1);
+
+    pub const ZH: Self = Initial(14 << 1);
+    pub const CH: Self = Initial(15 << 1);
+    pub const SH: Self = Initial(16 << 1);
+
+    pub const R: Self = Initial(17 << 1);
+    pub const Z: Self = Initial(18 << 1);
+    pub const C: Self = Initial(19 << 1);
+    pub const S: Self = Initial(20 << 1);
+
     #[inline]
     pub fn offset(&self) -> u8 {
         self.0 >> 1

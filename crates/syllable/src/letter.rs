@@ -1,31 +1,10 @@
-use std::fmt;
-
-
-// 字符 :
-//      Unicode 码位为: U+E7C8 
-//      现已被 U+01F9 替代
-// 字符 :
-//      Unicode 码位为: U+E7C7
-//      现已被 U+1E3F 替代
-// 在处理源码字符串时，请务必先解决这些遗留问题。
-// 
-// 字符 "" 这个字符早先出现在 GBK 编码当中，码位为: 0xA8BC
-// 被 GB 18030-2000 收录时 映射为: U+E7C7
-// 被 GB 18030-2005 收录时 映射为: U+1E3F
-// 所以，在处理 Unicode 时，需要把 `U+E7C7` 替换成最新的映射码位: U+1E3F
-// 参考:
-//      http://code.web.idv.hk/gb18030/gb18030.php?i=1
-//      http://www.khngai.com/chinese/charmap/tblgbk.php?page=2
-// 
-// Unicode 修饰字符
-// 第一声: \u0304  ̄
-// 第二声: \u0301  ́
-// 第三声: \u030C  ̌
-// 第四声: \u0300  ̀
+use core::fmt;
+use core::convert::TryFrom;
 
 
 // 上标数字: ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿⁱ
 // https://unicode-table.com/cn/blocks/superscripts-and-subscripts/
+#[rustfmt::skip]
 pub static SUPER_SCRIPT_TABLE: [&'static str; 10] = [
     "⁰", "¹", "²", "³", "⁴", 
     "⁵", "⁶", "⁷", "⁸", "⁹",
@@ -37,6 +16,7 @@ pub static SUPER_SCRIPT_TABLE: [&'static str; 10] = [
 // 自造字符: 6 个 ( "m̄" "m̌" "n̄" "M̄" "M̌" "N̄" )
 // 
 /// 拼音字母表
+#[rustfmt::skip]
 pub static LETTER_TABLE: [&'static str; 166] = [
     // 声母表码位段
     "b", "p", "m", "f", "d",
@@ -45,6 +25,7 @@ pub static LETTER_TABLE: [&'static str; 166] = [
     "z", "c", "s",
                    "w", "y", // 补写字母
     "v", "ẑ", "ĉ", "ŝ", "ŋ", // 特殊字母以及简写字母
+
     // 元音字母码位段
     "a", "ā", "á", "ǎ", "à",
     "e", "ē", "é", "ě", "è",
@@ -77,7 +58,7 @@ pub static LETTER_TABLE: [&'static str; 166] = [
     "5", "6", "7", "8", "9",
     "⁰", "¹", "²", "³", "⁴",
     "⁵", "⁶", "⁷", "⁸", "⁹",
-    // 音调符号
+    // 占位音调符号
     "˙", "ˉ", "ˊ", "ˇ", "ˋ",
     // 隔音符号
     "'",
@@ -92,6 +73,9 @@ pub struct Letter(pub(crate) u8);
 impl Letter {
     pub const MIN: Self = Letter(0);
     pub const MAX: Self = Letter(166);
+
+    // pub const E_CIRCUMFLEX
+    // pub const U_UMLAUT
 
     #[inline]
     pub fn as_str(&self) -> &'static str {
@@ -242,7 +226,7 @@ impl Letter {
 }
 
 
-impl std::str::FromStr for Letter {
+impl core::str::FromStr for Letter {
     type Err = ();
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
@@ -418,6 +402,22 @@ impl std::str::FromStr for Letter {
     }
 }
 
+
+impl TryFrom<char> for Letter {
+    type Error = ();
+
+    fn try_from(value: char) -> Result<Self, Self::Error> {
+        unimplemented!()
+    }
+}
+
+impl TryFrom<u8> for Letter {
+    type Error = ();
+
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        Letter::try_from(value as char)
+    }
+}
 
 #[test]
 fn test_letter() {
