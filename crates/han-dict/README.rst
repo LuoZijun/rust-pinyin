@@ -16,7 +16,6 @@
 引用
 --------
 
-*   `rust-han/data-guoyu-dict-revised
- <https://github.com/rust-han/data-guoyu-dict-revised>`_
+*   `rust-han/data-guoyu-dict-revised <https://github.com/rust-han/data-guoyu-dict-revised>`_
 *   `Unicode Han Database (Unihan) <https://unicode.org/reports/tr38/>`_
 *   `中華民國教育部國語辭典公眾授權網 <https://resources.publicense.moe.edu.tw/index.html>`_
