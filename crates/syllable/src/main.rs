@@ -1,4 +1,4 @@
-#[allow(unused_imports)]
+#![allow(unused_imports)]
 
 use syllable::pinyin::{ PinYin, PINYIN_TABLE, };
 use syllable::tone::{ Tone, ToneFormat, };

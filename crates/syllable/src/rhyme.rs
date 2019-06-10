@@ -1,11 +1,8 @@
 use core::fmt;
 
-use crate::SP;
 use crate::tone::{ Tone, ToneFormat, };
 use crate::initial::Initial;
 use crate::letter::Letter;
-
-const ______: &'static str = SP;
 
 
 // 韵母表
@@ -376,7 +373,6 @@ impl Rhyme {
     pub fn as_str(&self) -> &'static str {
         let offset = self.offset();
         let s = RHYME_TABLE[offset as usize];
-        debug_assert!(s != ______);
 
         if self.is_simplified() {
             // "ang", "eng", "ong",   // 10 ..= 12
